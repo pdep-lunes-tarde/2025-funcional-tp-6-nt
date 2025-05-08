@@ -15,7 +15,7 @@ correrTests = hspec $ do
 
         describe "agregarIngrediente" $ do
         it "recibe un ingrediente y lo agrega a la hamburguesa" $ do
-            agregarIngrediente Panceta (Hamburguesa 24 [Pan, Carne, Pan]) `shouldBe` Hamburguesa 34 [Panceta, Pan, Carne, Pan]
+            agregarIngrediente Panceta (Hamburguesa 24 [Pan, Carne, Pan]) `shouldBe` Hamburguesa 34 [Panceta, Pan, Carne, Pan] 
 
         describe "descuento" $ do
         it "aplica un descuento sobre el precio de la hamburguesa" $ do

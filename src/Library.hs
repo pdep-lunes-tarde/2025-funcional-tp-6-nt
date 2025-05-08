@@ -1,5 +1,6 @@
 {-# OPTIONS_GHC -Wno-unrecognised-pragmas #-}
 {-# HLINT ignore "Use foldr" #-}
+{-# OPTIONS_GHC -Wno-overlapping-patterns #-}
 module Library where
 import PdePreludat
 import GHC.IO.Handle (hClose)
@@ -37,11 +38,17 @@ agrandar burguer
 contiene :: Ingrediente -> [Ingrediente] -> Bool
 contiene _ [] = False
 contiene ingrediente (cabeza:cola) 
-    |ingrediente == cabeza = True
-    |otherwise = contiene ingrediente cola
+    |ingrediente == cabeza = True 
+    |otherwise = contiene ingrediente cola 
 
 agregarIngrediente :: Ingrediente -> Hamburguesa -> Hamburguesa 
 agregarIngrediente ing (Hamburguesa precio ings) = Hamburguesa (precio + precioIngrediente ing) (ing:ings)
 
 descuento :: Number -> Hamburguesa -> Hamburguesa
 descuento porcentajeDescuento (Hamburguesa precio ingredientes) = Hamburguesa (precio * (100 - porcentajeDescuento)/100) ingredientes 
+
+cuartoDeLibra :: Hamburguesa
+cuartoDeLibra = Hamburguesa 30 [Pan, Carne, Pan] -- carne (20) + cheddar (10) = 30
+
+dobleDeCuarto :: Hamburguesa 
+dobleDeCuarto  = agregarIngrediente Cheddar . agregarIngrediente Carne $ cuartoDeLibra 

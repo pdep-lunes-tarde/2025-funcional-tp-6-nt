@@ -13,11 +13,11 @@
 
 - Nombre del grupo
 
-- Legajo: **Completar**
-- Nombre: **Completar**
+- Legajo: **204.054-2**
+- Nombre: **Sassani Tomas**
 
-- Legajo: **Completar**
-- Nombre: **Completar**
+- Legajo: **215.503-5**
+- Nombre: **Sandoval Nicolas**
 
 - Legajo: **Completar**
 - Nombre: **Completar**

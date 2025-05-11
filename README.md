@@ -63,11 +63,11 @@ Las papas son un ingrediente que cuesta $10.
 ### PARTE 3: algunos cambios más 
 
 Queremos modelar los siguientes modificadores:
-- **hacerVeggie** : cambia todos los ingredientes base que hayan en la hamburguesa por PatiVegano (nuevo ingrediente base, también de precio 10), el cheddar lo cambia por queso de almendras y la panceta por bacon de tofu.
+- **hacerVeggie** : cambia todos los ingredientes base que hayan en la hamburguesa por PatiVegano (nuevo ingrediente base, también de precio 10), el cheddar lo cambia por queso de almendras y la panceta por bacon de tofu. 
 
   _Nota: ahora que hay un nuevo ingrediente base, **agrandar** una hamburguesa debería modificarse de manera acorde. Es decir, agrandar una hamburguesa cuyo ingrediente base es un PatiVegano debería agregarle otro PatiVegano._
 - **cambiarPanDePati** : cambia el Pan que haya en la hamburguesa por PanIntegral (ingrediente de precio 3).
-- hacer el **dobleCuartoVegano**, que es un dobleCuarto veggie con pan integral.
+- hacer el **dobleCuartoVegano**, que es un dobleCuarto veggie con pan integral. 
 
 
 ## Que hacer cuando terminan el TP

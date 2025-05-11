@@ -47,7 +47,7 @@ entrePanesDeCarne :: [Ingrediente] -> [Ingrediente]
 entrePanesDeCarne [] = []
 entrePanesDeCarne losIngredientes = agregarALaHAmburguesa losIngredientes Carne
 
-pdepBurger = Hamburguesa { precioBase = precioDeLaPdep [Pan,Panceta,Cheddar,Carne, Carne,Carne,Cheddar,Pan] , ingredientes = [Pan,Panceta,Cheddar,Carne, Carne,Carne,Cheddar,Pan]}
+pdepBurger = Hamburguesa { precioBase = 110 , ingredientes = [Pan,Panceta,Cheddar,Carne, Carne,Carne,Cheddar,Pan]}
 
 precioDeLaPdep :: [Ingrediente]-> Number
 precioDeLaPdep ingredientes = sum.map precioIngrediente $ ingredientes

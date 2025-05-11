@@ -27,10 +27,6 @@ data Hamburguesa = Hamburguesa {
 
 cuartoDeLibra = Hamburguesa { precioBase = 20, ingredientes = [Pan, Carne, Cheddar,Pan]}
 
---precioIngredientesCuartoDeLibra :: Hamburguesa -> Number
---precioIngredientesCuartoDeLibra (Hamburguesa precioBase ingredientes) = precioBaseCuartoDeLibra + sum (map precioIngrediente ingredientes) 
-
-
 agrandarPedido :: Hamburguesa -> Hamburguesa
 agrandarPedido (Hamburguesa precioBase ingredientes)
     | esDeCarne ingredientes = Hamburguesa (precioBase + precioIngrediente Carne) (entrePanesDeCarne ingredientes)
@@ -51,7 +47,7 @@ entrePanesDeCarne :: [Ingrediente] -> [Ingrediente]
 entrePanesDeCarne [] = []
 entrePanesDeCarne losIngredientes = agregarALaHAmburguesa losIngredientes Carne
 
-pdepBurger = Hamburguesa { precioBase = 110    , ingredientes = [Pan,Panceta,Cheddar,Carne, Carne,Carne,Cheddar,Pan]}
+pdepBurger = descuento 20 . precioDeLaHamburguesa . agregarIngredientes Panceta . agregarIngredientes Cheddar . agrandarPedido . agrandarPedido $ cuartoDeLibra
 
 precioDeLaPdep :: [Ingrediente]-> Number
 precioDeLaPdep ingredientes = sum.map precioIngrediente $ ingredientes
@@ -59,23 +55,25 @@ precioDeLaPdep ingredientes = sum.map precioIngrediente $ ingredientes
 agregarIngredientes :: Ingrediente -> Hamburguesa -> Hamburguesa
 agregarIngredientes  ingrediente (Hamburguesa precioBase losIngredientes) = Hamburguesa {precioBase = precioBase + precioIngrediente ingrediente, ingredientes = agregarALaHAmburguesa losIngredientes ingrediente }
 
-descuento :: Number -> Hamburguesa -> Hamburguesa
-descuento porcDesc (Hamburguesa precioBase ingredientes) = Hamburguesa {precioBase = precioBase - (precioBase * porcDesc) / 100, ingredientes = ingredientes}
+descuento :: Number-> Hamburguesa -> Hamburguesa
+descuento porcentaje unaHamburguesa = unaHamburguesa { precioBase = precioBase unaHamburguesa - precioBase cuartoDeLibra * porcentaje/100 }
+
+precioDeLaHamburguesa :: Hamburguesa -> Hamburguesa
+precioDeLaHamburguesa  unaHamburguesa = unaHamburguesa {precioBase =(+) (precioBase cuartoDeLibra). sum . map precioIngrediente  $ ingredientes unaHamburguesa, ingredientes = ingredientes unaHamburguesa}
 
 agregarALaHAmburguesa :: [Ingrediente] -> Ingrediente -> [Ingrediente]
 agregarALaHAmburguesa (x:xs) ingrediente = x:ingrediente:xs
 
 dobleCuartoDeLibra :: Hamburguesa
-dobleCuartoDeLibra  = agregarIngredientes Carne . agregarIngredientes Cheddar $ cuartoDeLibra
+dobleCuartoDeLibra  = precioDeLaHamburguesa . agrandarPedido . agregarIngredientes Cheddar $ cuartoDeLibra
 
 bigPdep :: Hamburguesa -> Hamburguesa
-bigPdep unaHamburguesa = agregarIngredientes Curry dobleCuartoDeLibra
+bigPdep unaHamburguesa = precioDeLaHamburguesa . agregarIngredientes Curry $ dobleCuartoDeLibra
 
 delDia :: Hamburguesa -> Hamburguesa
-delDia hamburguesa = descuento 30 . agregarIngredientes Papas $ hamburguesa
+delDia hamburguesa = descuento 30 . precioDeLaHamburguesa . agregarIngredientes Papas $ hamburguesa
 
---precioBaseCuartoDeLibra :: Number
---precioBaseCuartoDeLibra = 20
+
 
 -- =================== Parte 3 ======================= 
 
